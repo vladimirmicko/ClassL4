@@ -28,26 +28,34 @@
 		<property name="locations" value="classpath:application.properties"></property>
 	</bean>
 	
-	<!-- Local DataSource -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${database.driverClassName}" />
-		<property name="url" value="${database.url}" />
-		<property name="username" value="${database.username}" />
-		<property name="password" value="${database.password}" />
-	</bean>
+    <!-- Local DataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driverClassName}" />
+        <property name="url" value="${database.url}" />
+        <property name="username" value="${database.username}" />
+        <property name="password" value="${database.password}" />
+    </bean>
+    
+    <!-- Session Factory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 		 <property name="configLocation" value="classpath:hibernate.cfg.xml"/>  -->
+        <property name="hibernateProperties">
+            <map>
+                <entry key="hibernate.default_schema" value="${database.username}" />
+                <entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}" />
+                <entry key="show_sql" value="true" />
+                <entry key="hibernate.dialect" value="${hibernate.dialect}" />
+                <entry key="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory" />
+            </map>
+        </property>
+        <property name="packagesToScan">
+            <list>
+                <value>com.demo.vlada.entities</value>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
-		<property name="packagesToScan">
-			<list>
-				<value>com.demo.vlada.entities</value>
-			</list>
-		</property>
-	</bean>
-	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -58,6 +66,8 @@
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="genericFactory" class="com.demo.vlada.classloading.GenericFactory"/>
 
 </beans>
     

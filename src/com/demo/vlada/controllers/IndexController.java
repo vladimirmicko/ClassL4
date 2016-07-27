@@ -1,8 +1,10 @@
 package com.demo.vlada.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.demo.vlada.classloading.GenericFactory;
 import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
 import com.demo.vlada.dto.TextAreaDto;
 import com.demo.vlada.entities.PersistedFile;
+import com.demo.vlada.interfaces.LocalModule;
 import com.demo.vlada.network.Response;
 import com.demo.vlada.services.FileService;
 import com.demo.vlada.util.UtilHelper;
@@ -37,6 +41,9 @@ public class IndexController {
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private GenericFactory genericFactory;
 	
 	@Resource
 	private Environment env;
@@ -49,11 +56,14 @@ public class IndexController {
 				files.add((PersistedFile)fileService.getPersistedFileById(file.getId()));
 			}
 			for(PersistedFile pf : files) {
-				File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
-				FileOutputStream fos = new FileOutputStream(fileS);
-				fos.write(pf.getFileBytes());
-				fos.close();
-				System.out.println("DONE");
+				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
+				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces.Micko", myInputStream, LocalModule.class.getClassLoader());
+				lm.testAdd();
+//				File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
+//				FileOutputStream fos = new FileOutputStream(fileS);
+//				fos.write(pf.getFileBytes());
+//				fos.close();
+//				System.out.println("DONE");
 			}
 		} catch (Exception e) {
             return new ResponseEntity<Response>(new Response("You failed to upload a file: " + e.getMessage()), HttpStatus.EXPECTATION_FAILED);
