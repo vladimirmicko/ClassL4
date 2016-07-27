@@ -1,0 +1,42 @@
+<div class="container height-full" id="calculate">
+    <!-- List -->
+    <div class="col-md-7 height-full" id="calculate-list">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="calculate-list-item" ng-repeat="file in vm.files" ng-click="vm.selectFile(file)" ng-class="{active: vm.selectedFile.id == file.id}">
+                    <td>
+                        {{file.name}}
+                        <span class="glyphicon glyphicon-arrow-right calculate-list-item-arrow"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Options -->
+    <div class="col-md-5 height-full" id="calculate-options">
+        <h4>Selected file: <span id="calculate-options-selected_file">{{vm.selectedFile.name}}</span></h4>
+        <div class="container-fluid row">
+            <div class="col-md-6 row">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Value" ng-model="vm.calculateModel">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" ng-click="!vm.selectedFile.id || !vm.calculateModel || vm.calculate(vm.calculateModel, vm.selectedFile.id)">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid row" id="calculate-options-result">
+            <div class="panel panel-default">
+                <div class="panel-heading">Result</div>
+                <div class="panel-body">
+                    {{vm.calculateResult || 'No result'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

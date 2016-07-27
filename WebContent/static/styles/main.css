@@ -1,0 +1,85 @@
+#content-main_box {
+  padding-top: 51px;
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute; }
+
+/*=================================
+=            Home page            =
+=================================*/
+#home {
+  padding: 15px 15px 0; }
+  #home .home-col-options {
+    width: 150px; }
+  #home-editor {
+    height: 100%; }
+    #home-editor .ace_editor {
+      height: 95%;
+      width: 100%; }
+    #home-editor-button {
+      height: 5%;
+      padding-top: 8px; }
+
+/*=================================
+=            Calculate            =
+=================================*/
+#calculate {
+  padding: 15px 15px 0; }
+  #calculate-options-selected_file {
+    padding: 0 5px;
+    border-radius: 4px;
+    color: #777; }
+  #calculate-options-result {
+    margin-top: 18px; }
+  #calculate-list .calculate-list-item {
+    cursor: pointer; }
+    #calculate-list .calculate-list-item .calculate-list-item-arrow {
+      display: none;
+      float: right; }
+    #calculate-list .calculate-list-item.active td {
+      background: rgba(51, 122, 183, 0.31); }
+      #calculate-list .calculate-list-item.active td .calculate-list-item-arrow {
+        display: block; }
+
+/*==================================
+=            Upload file           =
+==================================*/
+#upload_file-head {
+  margin-bottom: 20px; }
+#upload_file-progress_bar {
+  height: 100%;
+  position: absolute;
+  background: rgba(23, 224, 23, 0.3);
+  border-radius: 4px;
+  transition: all .3s ease; }
+#upload_file-button {
+  position: relative;
+  z-index: 1;
+  cursor: pointer; }
+#upload_file-input {
+  background: transparent;
+  z-index: 1; }
+#upload_file-success {
+  color: green;
+  position: absolute;
+  right: 79px;
+  z-index: 1;
+  font-size: 21px;
+  top: 6px; }
+
+/*===============================
+=            Utiliyu            =
+===============================*/
+.vertical-middle {
+  vertical-align: middle !important; }
+
+.height-full {
+  height: 100%; }
+
+/*=====  End of Utiliyu  ======*/
+
+/*# sourceMappingURL=main.css.map */
+.active-green {
+	background-color: rgb(76, 175, 80);
+}

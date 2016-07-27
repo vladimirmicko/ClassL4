@@ -1,0 +1,20 @@
+<div class="container height-full" id="home">
+    <div class="col-md-12">
+    	<img ng-if="!vm.isLoaded" src="static/images/gears.gif" alt="Loading.." />
+    	<div ng-if="vm.isLoaded">
+	    	<table class="table table-responsive table-hover">
+	    		<thead>
+	    			<tr>
+	    				<th>Name</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr ng-repeat="file in vm.files" ng-click="vm.onFileSelect(file)" data-id="{{file.id}}">
+	    				<td>{{file.fileName}}</td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    	<a class="btn btn-success" ng-click="vm.downloadFiles()">Download</a>
+    	</div>
+    </div>
+</div>

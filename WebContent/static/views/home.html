@@ -1,0 +1,50 @@
+<div class="container height-full" id="home">
+    <div class="col-md-5" id="home-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="home-col-options"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="file in vm.files">
+                    <td class="vertical-middle"> {{file.name}} </td>
+                    <td class="vertical-middle">
+                        <button class="btn btn-success" ng-click="vm.startFile(file.id)"><span class="glyphicon glyphicon-play"></span></button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".home-edit-modal" ng-click="vm.setEditedFile(file)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-danger" ng-click="vm.deleteFile(file.id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-7" id="home-editor">
+        <div ui-ace="{
+              theme:'eclipse',
+              mode: 'java',
+            }" ng-model="vm.sCodeText"></div>
+        <div id="home-editor-button">
+            <button class="btn btn-primary" id="editor-button" ng-click="vm.codeSubmit(vm.sCodeText)">Send code</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade home-edit-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit file</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="vm.getEditedFile().name">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" ng-click="vm.editFile(vm.getEditedFile())" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

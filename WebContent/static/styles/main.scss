@@ -1,0 +1,115 @@
+#content-main_box {
+    padding-top: 51px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+}
+
+
+/*=================================
+=            Home page            =
+=================================*/
+
+#home {
+    padding: 15px 15px 0;
+    .home-col-options {
+        width: 150px;
+    }
+    &-editor {
+        height: 100%;
+        .ace_editor {
+            height: 95%;
+            width: 100%;
+        }
+        &-button {
+            height: 5%;
+            padding-top: 8px;
+        }
+    }
+}
+
+
+/*=================================
+=            Calculate            =
+=================================*/
+
+#calculate {
+    padding: 15px 15px 0;
+    &-options {
+        &-selected_file {
+            padding: 0 5px;
+            border-radius: 4px;
+            color: #777;
+        }
+        &-result {
+            margin-top: 18px;
+        }
+    }
+    &-list {
+        .calculate-list-item {
+            cursor: pointer;
+            .calculate-list-item-arrow {
+                display: none;
+                float: right;
+            }
+            &.active td {
+                background: rgba(51, 122, 183, 0.31);
+                .calculate-list-item-arrow {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+
+/*==================================
+=            Upload file           =
+==================================*/
+
+#upload_file {
+    &-head {
+        margin-bottom: 20px
+    }
+    &-progress_bar {
+        height: 100%;
+        position: absolute;
+        background: rgba(23, 224, 23, 0.3);
+        border-radius: 4px;
+        transition: all .3s ease;
+    }
+    &-button {
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+    &-input {
+        background: transparent;
+        z-index: 1;
+    }
+    &-success {
+        color: green;
+        position: absolute;
+        right: 79px;
+        z-index: 1;
+        font-size: 21px;
+        top: 6px;
+    }
+}
+
+
+/*===============================
+=            Utiliyu            =
+===============================*/
+
+.vertical-middle {
+    vertical-align: middle!important;
+}
+
+.height-full {
+    height: 100%;
+}
+
+
+/*=====  End of Utiliyu  ======*/

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="DynFiles">
+
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/styles/lib/bootstrap.css">
+    <link rel="stylesheet" href="static/styles/lib/ng-table.css">
+    <link rel="stylesheet" href="static/styles/main.css">
+</head>
+
+<body>
+    <!-- NAV -->
+    <div ng-include="'static/views/includes/nav.html'"></div>
+    <!-- NG view -->
+    <div ng-view id="content-main_box"></div>
+    <!-- JS libs -->
+    <script src="static/scripts/lib/angular.js"></script>
+    <script src="static/scripts/lib/jquery-2.2.4.js"></script>
+    <script src="static/scripts/lib/ng-table.js"></script>
+    <script src="static/scripts/lib/route-styles.js"></script>
+    <script src="static/scripts/lib/angular-route.js"></script>
+    <script src="static/scripts/lib/bootstrap.min.js"></script>
+    <script src="static/scripts/lib/ace/build/src/ace.js"></script>
+    <script src="static/scripts/lib/ui-ace.js"></script>
+    <script src="static/scripts/lib/angular-file-upload.min.js"></script>
+    <!-- App files -->
+    <script src="static/scripts/app.js"></script>
+    <!-- Controllers -->
+    <script src="static/scripts/controllers/HomeCtrl.js"></script>
+    <script src="static/scripts/controllers/CalculateCtrl.js"></script>
+    <script src="static/scripts/controllers/UploadFileCtrl.js"></script>
+    <script src="static/scripts/controllers/DownloadCtrl.js"></script>
+    <!-- Service -->
+    <script src="static/scripts/services/HomeService.js"></script>
+    <script src="static/scripts/services/CalculateService.js"></script>
+    <script src="static/scripts/services/UploadFileService.js"></script>
+</body>
+
+</html>
