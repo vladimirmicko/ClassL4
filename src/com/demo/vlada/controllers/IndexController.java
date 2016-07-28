@@ -57,7 +57,11 @@ public class IndexController {
 			}
 			for(PersistedFile pf : files) {
 				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
-				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces.Micko", myInputStream, LocalModule.class.getClassLoader());
+				System.out.println("********************************");
+				String className = pf.getName().split("\\.")[0];
+				System.out.println("ClassName:"+className);
+				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces."+className, myInputStream, LocalModule.class.getClassLoader());
+//				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces.Micko", myInputStream, LocalModule.class.getClassLoader());
 				lm.testAdd();
 //				File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
 //				FileOutputStream fos = new FileOutputStream(fileS);
