@@ -9,7 +9,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="file in vm.files">
-                    <td class="vertical-middle"> {{file.name}} </td>
+                    <td class="vertical-middle"> {{file.fileName}} </td>
                     <td class="vertical-middle">
                         <button class="btn btn-success" ng-click="vm.startFile(file.id)"><span class="glyphicon glyphicon-play"></span></button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".home-edit-modal" ng-click="vm.setEditedFile(file)"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" ng-model="vm.getEditedFile().name">
+                        <input type="text" class="form-control" ng-model="vm.getEditedFile().fileName">
                         <div class="input-group-btn">
                             <button class="btn btn-primary" ng-click="vm.editFile(vm.getEditedFile())" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
                         </div>

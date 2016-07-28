@@ -29,4 +29,12 @@ public class FileService {
 	public List<PersistedFileDto> getDtoFiles() {
 		return fileDao.getDtoFiles();
 	}
+	
+	public PersistedFile isFile(String fileName) {
+		return fileDao.isFile(fileName);
+	}
+	
+	public void remove(PersistedFile file) {
+		fileDao.remove(file);
+	}
 }

@@ -50,4 +50,16 @@ public class FileDaoImpl implements FileDao {
                 .add(Projections.property("name"), "fileName")).setResultTransformer(Transformers.aliasToBean(PersistedFileDto.class)).list();
 	}
 
+	@Override
+	@Transactional
+	public PersistedFile isFile(String fileName) {
+		return (PersistedFile)sessionFactory.getCurrentSession().createCriteria(PersistedFile.class).add(Restrictions.eq("name", fileName)).uniqueResult();
+	}
+
+	@Override
+	@Transactional
+	public void remove(PersistedFile file) {
+		sessionFactory.getCurrentSession().delete(file);
+	}
+
 }

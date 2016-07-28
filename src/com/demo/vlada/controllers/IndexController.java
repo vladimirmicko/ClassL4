@@ -111,18 +111,18 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value="/editFile", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
-	public ResponseEntity<Response> editFile(@RequestBody PersistedFile file) {
-		//fileService.saveOrUpdate(file);
-		//return new ResponseEntity<Response>(new Response("File successfully updated."), HttpStatus.OK);
-		return new ResponseEntity<Response>(new Response("File editing not supported yet."), HttpStatus.NOT_FOUND);
+	public ResponseEntity<Response> editFile(@RequestBody PersistedFileDto file) {
+		PersistedFile loaded = fileService.getPersistedFileById(file.getId());
+		loaded.setName(file.getFileName());
+		fileService.saveOrUpdate(loaded);
+		return new ResponseEntity<Response>(new Response("File successfully updated."), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> deleteFile(@PathVariable(value="id") Integer fileId) {
 		PersistedFile file = fileService.getPersistedFileById(fileId);
-		//fileService.remove(file);
-		//return new ResponseEntity<Response>(new Response("File successfully removed."), HttpStatus.OK);
-		return new ResponseEntity<Response>(new Response("Remove not supported yet."), HttpStatus.NOT_FOUND);
+		fileService.remove(file);
+		return new ResponseEntity<Response>(new Response("File successfully removed."), HttpStatus.OK);
 	}
 	
 	private ResponseEntity<Response> upload(MultipartFile file) {
@@ -132,6 +132,9 @@ public class IndexController {
             PersistedFile pf = new PersistedFile();
             pf.setFileBytes(bytes);
             pf.setName(fileName);
+            PersistedFile loaded = (PersistedFile)fileService.isFile(pf.getName());
+            if(loaded!=null)
+            	pf.setId(loaded.getId());
             fileService.saveOrUpdate(pf);
             return new ResponseEntity<Response>(new Response("You have successfully uploaded " + fileName, "C:/Work/Projects/VladaDemo/"+fileName), HttpStatus.OK);
         } catch (Exception e) {

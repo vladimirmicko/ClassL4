@@ -10,7 +10,7 @@
             <tbody>
                 <tr class="calculate-list-item" ng-repeat="file in vm.files" ng-click="vm.selectFile(file)" ng-class="{active: vm.selectedFile.id == file.id}">
                     <td>
-                        {{file.name}}
+                        {{file.fileName}}
                         <span class="glyphicon glyphicon-arrow-right calculate-list-item-arrow"></span>
                     </td>
                 </tr>

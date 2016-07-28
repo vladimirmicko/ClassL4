@@ -10,4 +10,6 @@ public interface FileDao {
 	public List<PersistedFile> getFiles();
 	public PersistedFile getPersistedFileById(Integer id);
 	public List<PersistedFileDto> getDtoFiles();
+	public PersistedFile isFile(String fileName);
+	public void remove(PersistedFile file);
 }
