@@ -60,9 +60,12 @@ public class IndexController {
 				System.out.println("********************************");
 				String className = pf.getName().split("\\.")[0];
 				System.out.println("ClassName:"+className);
-				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces."+className, myInputStream, LocalModule.class.getClassLoader());
-//				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces.Micko", myInputStream, LocalModule.class.getClassLoader());
+				System.out.println("LocalModule class loader:"+LocalModule.class.getClassLoader());
+				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces."+className, myInputStream);
 				lm.testAdd();
+		
+//				Writing a class as a file
+//				-------------------------
 //				File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
 //				FileOutputStream fos = new FileOutputStream(fileS);
 //				fos.write(pf.getFileBytes());

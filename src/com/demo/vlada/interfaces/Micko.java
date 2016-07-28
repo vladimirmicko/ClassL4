@@ -8,7 +8,9 @@ public class Micko implements com.demo.vlada.interfaces.LocalModule {
 		System.out.println("------------------------ MickoClass - ClassLoader");
 		System.out.println("Local module:"+com.demo.vlada.interfaces.LocalModule.class.getClassLoader());
 		System.out.println("Micko class:"+com.demo.vlada.interfaces.Micko.class.getClassLoader());
+		System.out.println("Micko class with: this.getClass().getClassLoader():"+this.getClass().getClassLoader());
 		System.out.println("------------------------ MickoClass - ClassLoader");
+		
 	}
 	
 	@Override
