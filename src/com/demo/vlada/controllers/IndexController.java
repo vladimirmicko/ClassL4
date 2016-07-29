@@ -48,6 +48,8 @@ public class IndexController {
 	@Resource
 	private Environment env;
 	
+	private Model1 m1;
+	
 	@RequestMapping(value="/download", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> addFile(@RequestBody List<PersistedFileDto> filesDto) throws IOException {
 		try {
@@ -62,7 +64,7 @@ public class IndexController {
 				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
 				String className = pf.getName().split("\\.")[0];
 				
-				Model1 m1 =(Model1) baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+				m1 =(Model1) baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
 				m1List.add(m1);
 				System.out.println("Class: " + className + "       calculate(2, 3): " + m1.calculate(2, 3));
 		
@@ -87,8 +89,25 @@ public class IndexController {
 	
 	@RequestMapping(value="/calculate", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> calculateResult(@RequestBody FileEDto fileDto) {
-		PersistedFile file = fileService.getPersistedFileById(fileDto.getFileId());
-		return new ResponseEntity<Response>(new Response(UtilHelper.calculateNetSalary(fileDto.getGrossSalary(), file.getName())), HttpStatus.OK);
+		PersistedFile file = (PersistedFile)fileService.getPersistedFileById(fileDto.getFileId());
+		InputStream myInputStream = new ByteArrayInputStream(file.getFileBytes());
+		String className = file.getName().split("\\.")[0];
+		
+		System.out.println("--------------------------------------------------- /calculate");
+		System.out.println("Dto FileIDClass: " + fileDto.getFileId());
+		System.out.println("Dto GrossSalary: " + fileDto.getGrossSalary());
+		System.out.println("Class name: " + className);
+		
+		
+		try {
+			m1 =(Model1)baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		Integer responseInt = m1.calculate(fileDto.getGrossSalary().intValue(), 1);
+		System.out.println("ResponseInt: " + responseInt);
+		System.out.println("-----------------------------------------------------------------");
+		return new ResponseEntity<Response>(new Response(responseInt), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/executeTextArea", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
