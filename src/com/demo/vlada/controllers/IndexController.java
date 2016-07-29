@@ -31,7 +31,6 @@ import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
 import com.demo.vlada.dto.TextAreaDto;
 import com.demo.vlada.entities.PersistedFile;
-import com.demo.vlada.interfaces.LocalModule;
 import com.demo.vlada.network.Response;
 import com.demo.vlada.services.FileService;
 import com.demo.vlada.util.UtilHelper;
@@ -53,17 +52,19 @@ public class IndexController {
 	public ResponseEntity<Response> addFile(@RequestBody List<PersistedFileDto> filesDto) throws IOException {
 		try {
 			List<PersistedFile> files = new ArrayList<PersistedFile>();
+			List<Model1> m1List = new ArrayList<Model1>();
+			
 			for(PersistedFileDto file : filesDto) {
 				files.add((PersistedFile)fileService.getPersistedFileById(file.getId()));
 			}
+			
 			for(PersistedFile pf : files) {
 				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
 				String className = pf.getName().split("\\.")[0];
-//				LocalModule lm =(LocalModule) baseObjectFactory.create("com.demo.vlada.interfaces."+className, myInputStream);
-//				lm.testAdd();
 				
 				Model1 m1 =(Model1) baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
-				System.out.println(m1.calculate(2, 3));
+				m1List.add(m1);
+				System.out.println("Class: " + className + "       calculate(2, 3): " + m1.calculate(2, 3));
 		
 //				Writing a class as a file
 //				-------------------------

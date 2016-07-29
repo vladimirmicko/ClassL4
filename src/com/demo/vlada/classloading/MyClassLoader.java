@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.demo.vlada.interfaces.LocalModule;
-
 public class MyClassLoader extends ClassLoader {
 
 	public MyClassLoader(ClassLoader clLoader) {
