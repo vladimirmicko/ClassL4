@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.demo.vlada.classes.baseobject.interfaces.Model1;
 import com.demo.vlada.classloading.BaseObjectFactory;
 import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
@@ -43,7 +44,7 @@ public class IndexController {
 	private FileService fileService;
 	
 	@Autowired
-	private BaseObjectFactory genericFactory;
+	private BaseObjectFactory baseObjectFactory;
 	
 	@Resource
 	private Environment env;
@@ -58,8 +59,11 @@ public class IndexController {
 			for(PersistedFile pf : files) {
 				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
 				String className = pf.getName().split("\\.")[0];
-				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces."+className, myInputStream);
-				lm.testAdd();
+//				LocalModule lm =(LocalModule) baseObjectFactory.create("com.demo.vlada.interfaces."+className, myInputStream);
+//				lm.testAdd();
+				
+				Model1 m1 =(Model1) baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+				System.out.println(m1.calculate(2, 3));
 		
 //				Writing a class as a file
 //				-------------------------

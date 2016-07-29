@@ -6,7 +6,7 @@ import com.demo.vlada.interfaces.LocalModule;
 
 public class BaseObjectFactory {
 	
-	private static BaseObjectFactory genericFactory = new BaseObjectFactory();
+	private static BaseObjectFactory baseObjectFactory = new BaseObjectFactory();
 	private static MyClassLoader gcl;
 	   
     private BaseObjectFactory(){ 
