@@ -116,8 +116,22 @@ public class IndexController {
 	
 	@RequestMapping(value="/executeFile/{id}", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> executeFiles(@PathVariable(value="id") Integer fileId) {
-		PersistedFile file = fileService.getPersistedFileById(fileId);
-		return new ResponseEntity<Response>(new Response("Response"), HttpStatus.OK);
+		PersistedFile file = (PersistedFile)fileService.getPersistedFileById(fileId);
+		InputStream myInputStream = new ByteArrayInputStream(file.getFileBytes());
+		String className = file.getName().split("\\.")[0];
+		
+		System.out.println("--------------------------------------------------- /execute");
+		System.out.println("Class name: " + className);
+		
+		try {
+			m1 =(Model1)baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		Integer responseInt = m1.calculate(5, 5);
+		System.out.println("Result of m1.calculate(5, 5): " + responseInt);
+		System.out.println("-----------------------------------------------------------------");
+		return new ResponseEntity<Response>(new Response(responseInt), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)

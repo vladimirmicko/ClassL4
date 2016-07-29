@@ -27,7 +27,7 @@ public class MyClassLoader extends ClassLoader {
 		if (c == null) {
 			byte[] bytea = this.read((ByteArrayInputStream) inputStream);
 			c = defineClass(name, bytea, 0, bytea.length);
-			System.out.println("OdefineClass method for ClassName: "+name+"   byte length:"+bytea.length);
+			System.out.println("DefineClass method for ClassName: "+name+"   byte length:"+bytea.length);
 		}
 		return (Class<?>) c;
 	}
