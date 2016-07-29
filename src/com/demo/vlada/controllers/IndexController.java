@@ -53,36 +53,35 @@ public class IndexController {
 	public ResponseEntity<Response> addFile(@RequestBody List<PersistedFileDto> filesDto) throws IOException {
 		Long startTime = System.nanoTime();
 		try {
-			List<PersistedFile> files = new ArrayList<PersistedFile>();
-			List<Model1> m1List = new ArrayList<Model1>();
-			
 			for(PersistedFileDto file : filesDto) {
-				files.add((PersistedFile)fileService.getPersistedFileById(file.getId()));
-			}
-			
-			for(PersistedFile pf : files) {
-				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
-				String className = pf.getName().split("\\.")[0];
+				String className = "com.demo.vlada.classes.baseobject." + file.getFileName().split("\\.")[0];
 				
-				m1 =(Model1) baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
-				m1List.add(m1);
+				Object o = baseObjectFactory.findClass(className);
+				if (o == null){
+					PersistedFile pf = (PersistedFile)fileService.getPersistedFileById(file.getId());
+					InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
+					m1 =(Model1)baseObjectFactory.create(className, myInputStream);
+					
+//					Writing a class as a file
+//					-------------------------
+//					File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
+//					FileOutputStream fos = new FileOutputStream(fileS);
+//					fos.write(pf.getFileBytes());
+//					fos.close();
+//					System.out.println("DONE");
+				}
+				else{
+					m1 =(Model1)o;
+				}
 				System.out.println("Class: " + className + "       calculate(2, 3): " + m1.calculate(2, 3));
-		
-//				Writing a class as a file
-//				-------------------------
-//				File fileS = new File("C:\\MyDocuments\\Misc\\"+pf.getName());
-//				FileOutputStream fos = new FileOutputStream(fileS);
-//				fos.write(pf.getFileBytes());
-//				fos.close();
-//				System.out.println("DONE");
 			}
 		} catch (Exception e) {
             return new ResponseEntity<Response>(new Response("You failed to download a file: " + e.getMessage()), HttpStatus.EXPECTATION_FAILED);
         }
 		Long endTime = System.nanoTime();
-		Long execTime = (endTime-startTime)/1000000;
+		Long execTime = (endTime-startTime);
 		System.out.println("---------------------------------------- Class loading time measurement:");
-		System.out.println("Execution time: " + execTime + "ms");
+		System.out.println("Execution time: " + execTime/1000000 + "ms");
 		return new ResponseEntity<Response>(new Response("Successfully downloaded all files."), HttpStatus.OK);
 	}
 	

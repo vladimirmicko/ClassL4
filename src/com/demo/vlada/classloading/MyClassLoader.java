@@ -14,6 +14,11 @@ public class MyClassLoader extends ClassLoader {
 		super(cl.getClassLoader());
 	}
 
+	
+	public Class<?> findClass(String name) {
+		Class<?> c = findLoadedClass(name);
+		return (Class<?>) c;
+	}
 
 	public Class<?> loadClass(String name, InputStream inputStream) throws IOException {
 		Class<?> c = findLoadedClass(name);
