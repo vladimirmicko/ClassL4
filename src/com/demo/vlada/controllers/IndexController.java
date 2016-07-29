@@ -1,14 +1,8 @@
 package com.demo.vlada.controllers;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -54,7 +48,7 @@ public class IndexController {
 		Long startTime = System.nanoTime();
 		try {
 			for(PersistedFileDto file : filesDto) {
-				String className = "com.demo.vlada.classes.baseobject." + file.getFileName().split("\\.")[0];
+				String className = file.getFileName().split("\\.")[0];
 				
 				Object o = baseObjectFactory.findClass(className);
 				if (o == null){
@@ -103,7 +97,7 @@ public class IndexController {
 		
 		
 		try {
-			m1 =(Model1)baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+			m1 =(Model1)baseObjectFactory.create(className, myInputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -128,7 +122,7 @@ public class IndexController {
 		System.out.println("Class name: " + className);
 		
 		try {
-			m1 =(Model1)baseObjectFactory.create("com.demo.vlada.classes.baseobject."+className, myInputStream);
+			m1 =(Model1)baseObjectFactory.create(className, myInputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
