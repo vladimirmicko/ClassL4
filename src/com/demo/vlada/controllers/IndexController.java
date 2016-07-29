@@ -29,11 +29,10 @@ import com.demo.vlada.classes.baseobject.interfaces.Model1;
 import com.demo.vlada.classloading.BaseObjectFactory;
 import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
+import com.demo.vlada.dto.Response;
 import com.demo.vlada.dto.TextAreaDto;
 import com.demo.vlada.entities.PersistedFile;
-import com.demo.vlada.network.Response;
 import com.demo.vlada.services.FileService;
-import com.demo.vlada.util.UtilHelper;
 
 @RestController
 @RequestMapping(value="/rest")
@@ -112,13 +111,13 @@ public class IndexController {
 	
 	@RequestMapping(value="/executeTextArea", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> executeTextArea(@RequestBody TextAreaDto text) {
-		return new ResponseEntity<Response>(new Response(UtilHelper.executeTextArea(text)), HttpStatus.OK);
+		return new ResponseEntity<Response>(new Response("Response"), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/executeFile/{id}", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> executeFiles(@PathVariable(value="id") Integer fileId) {
 		PersistedFile file = fileService.getPersistedFileById(fileId);
-		return new ResponseEntity<Response>(new Response(UtilHelper.executeFiles(file)), HttpStatus.OK);
+		return new ResponseEntity<Response>(new Response("Response"), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)

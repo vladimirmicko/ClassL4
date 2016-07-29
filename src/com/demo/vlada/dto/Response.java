@@ -1,4 +1,4 @@
-package com.demo.vlada.network;
+package com.demo.vlada.dto;
 
 public class Response {
 	private String result;
