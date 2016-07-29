@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import com.demo.vlada.interfaces.LocalModule;
 
-public class GenericFactory {
+public class BaseObjectFactory {
 	
-	private static GenericFactory genericFactory = new GenericFactory();
-	private static GenericClassLoader gcl;
+	private static BaseObjectFactory genericFactory = new BaseObjectFactory();
+	private static MyClassLoader gcl;
 	   
-    private GenericFactory(){ 
-    	gcl = new GenericClassLoader(LocalModule.class.getClassLoader());
+    private BaseObjectFactory(){ 
+    	gcl = new MyClassLoader(LocalModule.class.getClassLoader());
     }
 
 	public static Object create(String qualifiedName, InputStream inputStream)

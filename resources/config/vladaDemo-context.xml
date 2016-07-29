@@ -67,7 +67,7 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="genericFactory" class="com.demo.vlada.classloading.GenericFactory"/>
+	<bean id="baseObjectFactory" class="com.demo.vlada.classloading.BaseObjectFactory"/>
 
 </beans>
     

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.demo.vlada.classloading.GenericFactory;
+import com.demo.vlada.classloading.BaseObjectFactory;
 import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
 import com.demo.vlada.dto.TextAreaDto;
@@ -43,7 +43,7 @@ public class IndexController {
 	private FileService fileService;
 	
 	@Autowired
-	private GenericFactory genericFactory;
+	private BaseObjectFactory genericFactory;
 	
 	@Resource
 	private Environment env;
@@ -57,10 +57,7 @@ public class IndexController {
 			}
 			for(PersistedFile pf : files) {
 				InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
-				System.out.println("********************************");
 				String className = pf.getName().split("\\.")[0];
-				System.out.println("ClassName:"+className);
-				System.out.println("LocalModule class loader:"+LocalModule.class.getClassLoader());
 				LocalModule lm =(LocalModule) genericFactory.create("com.demo.vlada.interfaces."+className, myInputStream);
 				lm.testAdd();
 		
