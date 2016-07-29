@@ -51,6 +51,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/download", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	public ResponseEntity<Response> addFile(@RequestBody List<PersistedFileDto> filesDto) throws IOException {
+		Long startTime = System.nanoTime();
 		try {
 			List<PersistedFile> files = new ArrayList<PersistedFile>();
 			List<Model1> m1List = new ArrayList<Model1>();
@@ -76,8 +77,12 @@ public class IndexController {
 //				System.out.println("DONE");
 			}
 		} catch (Exception e) {
-            return new ResponseEntity<Response>(new Response("You failed to upload a file: " + e.getMessage()), HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<Response>(new Response("You failed to download a file: " + e.getMessage()), HttpStatus.EXPECTATION_FAILED);
         }
+		Long endTime = System.nanoTime();
+		Long execTime = (endTime-startTime)/1000000;
+		System.out.println("---------------------------------------- Class loading time measurement:");
+		System.out.println("Execution time: " + execTime + "ms");
 		return new ResponseEntity<Response>(new Response("Successfully downloaded all files."), HttpStatus.OK);
 	}
 	
