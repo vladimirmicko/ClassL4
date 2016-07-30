@@ -1,35 +1,30 @@
 package com.demo.vlada.classloading;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import com.demo.vlada.classes.baseobject.interfaces.BaseObject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.demo.vlada.entities.PersistedFile;
+import com.demo.vlada.services.FileService;
 
 public class BaseObjectFactory {
-
-	private static BaseObjectFactory baseObjectFactory = new BaseObjectFactory();
-	private static MyClassLoader gcl;
-	private static String packageName = "com.demo.vlada.classes.baseobject.";
-
-	private BaseObjectFactory() {
-		gcl = new MyClassLoader(BaseObject.class.getClassLoader());
-	}
-
-	public static Object findClass(String name) throws InstantiationException, IllegalAccessException {
+	private String packageName = "com.demo.vlada.classes.baseobject.";
+	
+	@Autowired
+	private FileService fileService;
+	
+	public Object create(String name) throws InstantiationException, IllegalAccessException, IOException {
 		String qualifiedName=packageName+name;
-		Object o;
-		Class<?> c = gcl.findClass(qualifiedName);
-		if (c == null) {
-			return null;
-		} else {
-			o = c.newInstance();
+		Object o = ObjectFactory.findClass(qualifiedName);
+		if (o == null){
+			PersistedFile pf = (PersistedFile)fileService.getFileByName(name+".class");
+			InputStream myInputStream = new ByteArrayInputStream(pf.getFileBytes());
+			o = ObjectFactory.create(qualifiedName, myInputStream);
 		}
 		return o;
 	}
-
-	public static Object create(String name, InputStream inputStream)
-			throws InstantiationException, IllegalAccessException, IOException {
-		String qualifiedName=packageName+name;
-		return gcl.loadClass(qualifiedName, inputStream).newInstance();
-	}
-
+	
 }

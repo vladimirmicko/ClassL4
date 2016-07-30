@@ -52,7 +52,7 @@ public class FileDaoImpl implements FileDao {
 
 	@Override
 	@Transactional
-	public PersistedFile isFile(String fileName) {
+	public PersistedFile getFileByName(String fileName) {
 		return (PersistedFile)sessionFactory.getCurrentSession().createCriteria(PersistedFile.class).add(Restrictions.eq("name", fileName)).uniqueResult();
 	}
 

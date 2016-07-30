@@ -30,8 +30,8 @@ public class FileService {
 		return fileDao.getDtoFiles();
 	}
 	
-	public PersistedFile isFile(String fileName) {
-		return fileDao.isFile(fileName);
+	public PersistedFile getFileByName(String fileName) {
+		return fileDao.getFileByName(fileName);
 	}
 	
 	public void remove(PersistedFile file) {
