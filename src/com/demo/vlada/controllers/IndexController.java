@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.Resource;
 
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.demo.vlada.classes.baseobject.interfaces.Model1;
 import com.demo.vlada.classloading.BaseObjectFactory;
 import com.demo.vlada.classloading.ObjectFactory;
+import com.demo.vlada.classloading.PropertyFactory;
 import com.demo.vlada.dto.FileEDto;
 import com.demo.vlada.dto.PersistedFileDto;
 import com.demo.vlada.dto.Response;
@@ -38,6 +40,9 @@ public class IndexController {
 
 	@Autowired
 	private BaseObjectFactory baseObjectFactory;
+	
+	@Autowired
+	private PropertyFactory propertyFactory;
 
 	@Resource
 	private Environment env;
@@ -99,22 +104,14 @@ public class IndexController {
 
 	@RequestMapping(value = "/executeFile/{id}", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public ResponseEntity<Response> executeFiles(@PathVariable(value = "id") Integer fileId) {
-		PersistedFile file = (PersistedFile) fileService.getPersistedFileById(fileId);
-		InputStream myInputStream = new ByteArrayInputStream(file.getFileBytes());
-		String className = file.getName().split("\\.")[0];
-
-		System.out.println("--------------------------------------------------- /execute");
-		System.out.println("Class name: " + className);
-
+		ResourceBundle bundle = null;
 		try {
-			m1 = (Model1) baseObjectFactory.create(className);
-		} catch (Exception e) {
+			bundle = propertyFactory.create(fileId);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Integer responseInt = m1.calculate(5, 5);
-		System.out.println("Result of m1.calculate(5, 5): " + responseInt);
-		System.out.println("-----------------------------------------------------------------");
-		return new ResponseEntity<Response>(new Response(responseInt), HttpStatus.OK);
+		System.out.println("This is the value of hello: " + bundle.getString("hello"));
+		return new ResponseEntity<Response>(new Response(1), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)

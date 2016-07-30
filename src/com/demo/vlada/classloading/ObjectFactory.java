@@ -32,4 +32,7 @@ public class ObjectFactory {
 		return myClassLoader.loadClass(qualifiedName, inputStream).newInstance();
 	}
 
+	public static MyClassLoader getMyClassLoader() {
+		return myClassLoader;
+	}
 }
