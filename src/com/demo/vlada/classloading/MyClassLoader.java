@@ -4,6 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 
+ * @author randjelovicv
+ *
+ */
+
 public class MyClassLoader extends ClassLoader {
 
 	public MyClassLoader(ClassLoader clLoader) {

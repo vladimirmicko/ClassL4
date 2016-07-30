@@ -31,6 +31,12 @@ import com.demo.vlada.dto.TextAreaDto;
 import com.demo.vlada.entities.PersistedFile;
 import com.demo.vlada.services.FileService;
 
+/**
+ * 
+ * @author randjelovicv
+ *
+ */
+
 @RestController
 @RequestMapping(value = "/rest")
 public class IndexController {

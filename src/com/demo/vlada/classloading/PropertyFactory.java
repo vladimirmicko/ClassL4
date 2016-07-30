@@ -12,6 +12,12 @@ import org.springframework.stereotype.Component;
 import com.demo.vlada.entities.PersistedFile;
 import com.demo.vlada.services.FileService;
 
+/**
+ * 
+ * @author randjelovicv
+ *
+ */
+
 public class PropertyFactory {
 
 	@Autowired

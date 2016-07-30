@@ -3,12 +3,16 @@ package com.demo.vlada.classloading;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.demo.vlada.entities.PersistedFile;
 import com.demo.vlada.services.FileService;
+
+/**
+ * BaseObjectFactory
+ * @author randjelovicv
+ *
+ */
 
 public class BaseObjectFactory {
 	private String packageName = "com.demo.vlada.classes.baseobject.";

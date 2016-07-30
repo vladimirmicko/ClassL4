@@ -4,6 +4,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
+/**
+ * 
+ * @author randjelovicv
+ *
+ */
+
 public class ResourceBundleDemo {
 
 	public static void main(String[] args) {

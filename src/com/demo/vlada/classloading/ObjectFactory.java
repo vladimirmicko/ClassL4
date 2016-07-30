@@ -13,6 +13,12 @@ import com.demo.vlada.entities.PersistedFile;
 import com.demo.vlada.services.FileService;
 
 
+/**
+ * 
+ * @author randjelovicv
+ *
+ */
+
 public class ObjectFactory {
 	
 	private static ObjectFactory objectFactory = new ObjectFactory();
