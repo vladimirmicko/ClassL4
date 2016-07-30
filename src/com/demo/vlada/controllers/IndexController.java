@@ -110,8 +110,8 @@ public class IndexController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("This is the value of hello: " + bundle.getString("hello"));
-		return new ResponseEntity<Response>(new Response(1), HttpStatus.OK);
+		System.out.println("Property parameter testParam: " + bundle.getString("testParam"));
+		return new ResponseEntity<Response>(new Response(bundle.getString("testParam")), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)

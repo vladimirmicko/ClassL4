@@ -43,6 +43,7 @@ angular.module('DynFiles')
          vm.startFile = function(fileId) { // Start file from list
             HomeService.executeFile(fileId).then(function(result) {
                console.log(result)
+               $scope.testProperty = result.data.result
                if (bSuccessMessage) {
                   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@ executeFile - SUCCESSFUL");
                }
