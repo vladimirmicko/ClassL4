@@ -77,15 +77,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/calculate", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	public ResponseEntity<Response> calculateResult(@RequestBody FileEDto fileDto) {
-		PersistedFile file = (PersistedFile) fileService.getPersistedFileById(fileDto.getFileId());
-		InputStream myInputStream = new ByteArrayInputStream(file.getFileBytes());
-		String className = file.getName().split("\\.")[0];
-
-		System.out.println("--------------------------------------------------- /calculate");
-		System.out.println("Dto FileIDClass: " + fileDto.getFileId());
-		System.out.println("Dto GrossSalary: " + fileDto.getGrossSalary());
-		System.out.println("Class name: " + className);
-
+		String className = fileDto.getFileName().split("\\.")[0];
 		try {
 			m1 = (Model1) baseObjectFactory.create(className);
 		} catch (Exception e) {

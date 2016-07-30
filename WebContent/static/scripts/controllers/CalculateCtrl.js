@@ -30,8 +30,10 @@ angular.module('DynFiles')
             });
          }
 
-         vm.calculate = function(value, fileId) {
-            CalculateService.calculate(value, fileId).then(function(result) {
+         vm.calculate = function(value, fileName) {
+        	console.log("value:"+value);
+        	console.log("fileName:"+fileName);
+            CalculateService.calculate(value, fileName).then(function(result) {
                vm.calculateResult = result.data.result;
                if (bSuccessMessage) {
                   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@ calculate - SUCCESSFUL");

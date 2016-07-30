@@ -2,7 +2,7 @@ package com.demo.vlada.dto;
 
 public class FileEDto {
 	private Float grossSalary;
-	private Integer fileId;
+	private String fileName;
 	
 	public Float getGrossSalary() {
 		return grossSalary;
@@ -10,10 +10,11 @@ public class FileEDto {
 	public void setGrossSalary(Float grossSalary) {
 		this.grossSalary = grossSalary;
 	}
-	public Integer getFileId() {
-		return fileId;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setFileId(Integer fileId) {
-		this.fileId = fileId;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
+
 }

@@ -5,10 +5,10 @@ angular.module('DynFiles')
 
          var ajaxPrefix = $rootScope.ajaxHostPrefix;
 
-         service.calculate = function(value, fileId) { // Calculate with input valued
+         service.calculate = function(value, fileName) { // Calculate with input valued
             return $http.post(ajaxPrefix + 'calculate', {
                grossSalary: value,
-               fileId: fileId
+               fileName: fileName
             });
          }
 
